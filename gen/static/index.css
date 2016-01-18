@@ -1,0 +1,76 @@
+body {
+    margin: 0px;
+    background-color: #12162B;
+    font-family: Lato;
+}
+
+.page {
+    margin-top: 50px;
+    margin-right: 25px;
+    margin-left: 25px;
+    background-color: #252839;
+    padding: 10px;
+}
+
+p {
+    color: #FFFFFF;
+}
+
+table {
+    color: #FFFFFF;
+    width: 90%;
+    margin: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 10px;
+}
+
+h1 {
+    color: #FFFFFF;
+    -webkit-transform: translate3d(0,0,0) !important;
+    transform: translate3d(0,0,0) !important;
+}
+
+.block {
+    height:100px;
+    width:200px;
+    text-align:center;
+}
+.center {
+    margin:auto;
+}
+
+td, th {
+    height: 30px;
+    transition: all 0.3s;  /* Simple transition for hover effect */
+}
+
+th {
+    background: #252839;  /* Darken header a bit */
+    font-weight: bold;
+}
+
+td {
+    background: #FAFAFA;
+    text-align: center;
+    border-right: solid 1px #fff;
+    border-left: solid 1px #fff;
+}
+
+.no {
+    border: none;
+}
+
+.yes {
+    border-bottom: solid 1px #fff;
+}
+
+tr {
+    border: none;
+}
+
+/* Cells in even rows (2,4,6...) are one color */
+tr:nth-child(even) td { background: #252839; }
+
+/* Cells in odd rows (1,3,5...) are another (excludes header cells)  */
+tr:nth-child(odd) td { background: #12162B; }

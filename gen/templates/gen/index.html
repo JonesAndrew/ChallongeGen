@@ -1,0 +1,28 @@
+{% load staticfiles %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
+</head>
+<body>
+    <div>
+         <div id="child1" class="block center"><h1>Metrowest Melee</h1></div>
+    </div>
+    <div class="page">
+        <table>
+            <tr class="yes">
+                <th>Rank</th>
+                <th>Tag</th>
+                <th>ELO</th>
+                <th>Uncertainty</th>
+            </tr>
+                {% for player in elo_players %}
+                    <tr>
+                        <td class="no"> {{ forloop.counter }} </td>
+                        <td> {{ player.name }} </td>
+                        <td> {{ player.mu|floatformat:2 }} </td>
+                        <td class="no"> {{ player.sigma|floatformat:2 }} </td>
+                    </tr>
+                {% endfor %}
+        </table>
+    </div>
+</body>
