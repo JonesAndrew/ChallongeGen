@@ -14,13 +14,21 @@
                 <th>Tag</th>
                 <th>ELO</th>
                 <th>Uncertainty</th>
+                <th>Sets Won</th>
+                <th>Sets Lost</th>
+                <th>Games Won</th>
+                <th>Games Lost</th>
             </tr>
                 {% for player in elo_players %}
                     <tr>
                         <td class="no"> {{ forloop.counter }} </td>
                         <td> {{ player.name }} </td>
                         <td> {{ player.mu|floatformat:2 }} </td>
-                        <td class="no"> {{ player.sigma|floatformat:2 }} </td>
+                        <td> {{ player.sigma|floatformat:2 }} </td>
+                        <td> {{ player.Swins }} </td>
+                        <td> {{ player.Slosses }} </td>
+                        <td> {{ player.Gwins }} </td>
+                        <td class="no"> {{ player.Glosses }} </td>
                     </tr>
                 {% endfor %}
         </table>

@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from gen.models import Player
+from gen.models import Player,Tournament,TournamentList
 from .forms import BracketForm
-import operator
+import operator, re
 
 def update(request):
     # if this is a POST request we need to process the form data
@@ -36,6 +36,18 @@ def update(request):
                     parts[p["id"]] = player;
 
             def tournament(tourney):
+                tList = TournamentList.load()
+
+                for t in tList.tournaments.all():
+                    if t.name == tourney:
+                        return None
+
+                t = Tournament()
+                t.name = tourney
+                t.save()
+                tList.tournaments.add(t)
+                tList.save()
+
                 participants = challonge.participants.index(tourney)
 
                 for p in participants:
@@ -45,10 +57,13 @@ def update(request):
                 matches = challonge.matches.index(tourney)
 
                 for m in matches:
-                    print(parts[m["player1-id"]].name + " vs " + parts[m["player2-id"]].name)
-                    print(parts[m["winner-id"]].name + " won!")
+                    score = re.findall(r'\d+', m["scores-csv"])
                     id1 = m["player1-id"]
                     id2 = m["player2-id"]
+                    parts[id1].Gwins+=int(score[0])
+                    parts[id1].Glosses+=int(score[1])
+                    parts[id2].Gwins+=int(score[1])
+                    parts[id2].Glosses+=int(score[0])
                     if m["winner-id"] == id2:
                         temp = id1
                         id1 = id2
@@ -63,6 +78,8 @@ def update(request):
                     parts[id1].sigma = r1.sigma
                     parts[id2].mu = r2.mu
                     parts[id2].sigma = r2.sigma
+                    parts[id1].Swins+=1
+                    parts[id2].Slosses+=1
 
             tournament(url)
 
