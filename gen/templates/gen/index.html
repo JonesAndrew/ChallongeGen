@@ -21,16 +21,27 @@
             </tr>
                 {% for player in elo_players %}
                     <tr>
-                        <td class="no"> {{ forloop.counter }} </td>
-                        <td> {{ player.name }} </td>
-                        <td> {{ player.mu|floatformat:2 }} </td>
-                        <td> {{ player.sigma|floatformat:2 }} </td>
-                        <td> {{ player.Swins }} </td>
-                        <td> {{ player.Slosses }} </td>
-                        <td> {{ player.Gwins }} </td>
-                        <td class="no"> {{ player.Glosses }} </td>
+                        <td class="no main"> {{ forloop.counter }} </td>
+                        <td class="main"> {{ player.name }} </td>
+                        <td class="main"> {{ player.safe|floatformat:2 }} </td>
+                        <td class="main"> {{ player.sigma|floatformat:2 }} </td>
+                        <td class="main"> {{ player.Swins }} </td>
+                        <td class="main"> {{ player.Slosses }} </td>
+                        <td class="main"> {{ player.Gwins }} </td>
+                        <td class="no main"> {{ player.Glosses }} </td>
                     </tr>
                 {% endfor %}
         </table>
+        <div>
+             <div id="child1" class="block center"><h3>Tournament List</h3></div>
+        </div>
+        <table class="list">
+            {% for t in tournaments %}
+                {% if forloop.counter0|divisibleby:3 %}<tr>{% endif %}
+                    <td class="no"> {{ t.name }} </td>
+                {% if forloop.counter|divisibleby:3 or forloop.last %}</tr>{% endif %}
+            {% endfor %}
+        </table>
+        <div class="clear"></div>
     </div>
 </body>

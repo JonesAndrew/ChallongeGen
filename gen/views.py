@@ -77,7 +77,9 @@ def update(request):
                     parts[id1].mu = r1.mu
                     parts[id1].sigma = r1.sigma
                     parts[id2].mu = r2.mu
+                    parts[id1].safe = parts[id1].mu-(3*parts[id1].sigma)
                     parts[id2].sigma = r2.sigma
+                    parts[id2].safe = parts[id2].mu-(3*parts[id1].sigma)
                     parts[id1].Swins+=1
                     parts[id2].Slosses+=1
 
@@ -98,6 +100,6 @@ def update(request):
 
 def index(request):
 
-    players = Player.objects.order_by("-mu")
+    players = Player.objects.order_by("-safe")
 
-    return render(request, 'gen/index.html', context = {'elo_players': players})
+    return render(request, 'gen/index.html', context = {'elo_players': players, "tournaments": TournamentList.load().tournaments.all()})
